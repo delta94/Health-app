@@ -10,12 +10,21 @@ export function DropDownMenu({ items }: { items: MenuItemProps[] }) {
       mt={2}
       w="280px"
       bg="gray.400"
+      zIndex={21}
       boxShadow="lg"
       listStyleType="none"
     >
-      {items.map(item => (
-        <Link href={item.url} key={item.label} _hover={{ textDecor: 'none' }}>
-          <ListItem _notLast={{ borderBottom: '1px solid rgba(255,255,255,0.15)' }} px={8} py={6}>
+      {items.map((item, index) => (
+        <Link href={item.url} key={`${item.label}-${index}`} _hover={{ textDecor: 'none' }}>
+          <ListItem
+            _hover={{ bg: '' }}
+            fontFamily="hira"
+            fontSize="18px"
+            color="white"
+            borderBottom="1px solid rgba(255,255,255,0.15)"
+            px={8}
+            py={6}
+          >
             {item.label}
           </ListItem>
         </Link>
