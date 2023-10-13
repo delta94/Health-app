@@ -1,48 +1,38 @@
-import _ from 'lodash';
+import { LineChartData, MealItemProps } from '@/types';
 import { rest } from 'msw';
-import { meals } from './data/mealsData';
-import { PaginableData } from '@/types';
-
-interface Meal {
-  id: number;
-  date: string;
-  image: string;
-  label: string;
-}
+import { dataByTimeRange, diaryData, exerciseData, meals } from './data/mealsData';
 
 interface MealsData {
-  morning: Meal[];
-  lunch: Meal[];
-  dinner: Meal[];
-  snack: Meal[];
+  morning: MealItemProps[];
+  lunch: MealItemProps[];
+  dinner: MealItemProps[];
+  snack: MealItemProps[];
 }
+
+type TimeRangeKey = '日' | '週' | '月' | '年';
 
 export const mealsHandlers = [
   rest.get('/api/meals', (req, res, ctx) => {
     try {
-      const type = req.url.searchParams.get('type') as keyof MealsData | null;
-
-      const page = Number(req.url.searchParams.get('page') || 1);
-      const pageSize = 5;
-      const startIndex = (page - 1) * pageSize;
+      const type = req.url.searchParams.get('type') as keyof MealsData | 'all';
+      const pageParam = Number(req.url.searchParams.get('page') || 1);
+      const pageSize = 8;
+      const startIndex = (pageParam - 1) * pageSize;
       const endIndex = startIndex + pageSize;
 
-      const targetMeals = type ? meals[type] : Object.values(meals).flat();
+      const targetMeals = type !== 'all' ? meals[type] : Object.values(meals).flat();
 
       const paginatedData = targetMeals.slice(startIndex, endIndex);
-      console.log({
-        data: paginatedData,
-        last: pageSize * (page + 1) >= targetMeals.length,
-        totalPage: Math.ceil(targetMeals.length / pageSize),
-        totalRecords: targetMeals.length,
-      });
+
       return res(
         ctx.status(200),
+        ctx.delay(2000),
         ctx.json({
           data: paginatedData,
-          last: pageSize * (page + 1) >= targetMeals.length,
+          last: pageSize * pageParam >= targetMeals.length,
           totalPage: Math.ceil(targetMeals.length / pageSize),
           totalRecords: targetMeals.length,
+          page: pageParam,
         })
       );
     } catch (err) {
@@ -58,5 +48,44 @@ export const mealsHandlers = [
         percentage: '75%',
       })
     );
+  }),
+
+  rest.get('/api/diary', (req, res, ctx) => {
+    try {
+      const pageParam = Number(req.url.searchParams.get('page') || 1);
+      const pageSize = 8;
+      const startIndex = (pageParam - 1) * pageSize;
+      const endIndex = startIndex + pageSize;
+
+      const paginatedData = diaryData.slice(startIndex, endIndex);
+
+      return res(
+        ctx.status(200),
+        ctx.delay(2000),
+        ctx.json({
+          data: paginatedData,
+          last: pageSize * pageParam >= diaryData.length,
+          totalPage: Math.ceil(diaryData.length / pageSize),
+          totalRecords: diaryData.length,
+          page: pageParam,
+        })
+      );
+    } catch (err) {
+      return res(ctx.status(500), ctx.json({ errorMessage: 'An unexpected error occurred.' }));
+    }
+  }),
+
+  rest.get('/api/excercises', (req, res, ctx) => {
+    try {
+      return res(ctx.status(200), ctx.delay(5000), ctx.json(exerciseData));
+    } catch (err) {
+      return res(ctx.status(500), ctx.json({ errorMessage: 'An unexpected error occurred.' }));
+    }
+  }),
+
+  rest.get('/api/chartData/:timeRange', (req, res, ctx) => {
+    const { timeRange } = req.params;
+    const data: LineChartData = dataByTimeRange[timeRange as TimeRangeKey];
+    return res(ctx.json(data));
   }),
 ];
