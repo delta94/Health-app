@@ -1,36 +1,90 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# **Health App**
 
-## Getting Started
+<div align="center">
+  <a href="https://github.com/delta94/Health-app">
+    <img src="public/logo.svg" alt="Logo">
+  </a>
+</div>
 
-First, run the development server:
+## Introduction
+
+The `Health App` is a health monitoring application developed to help users maintain a holistic view of their health. The application tracks physical metrics and suggests personalized exercise routines and dietary plans.
+
+## Prerequisites
+
+### General
+
+Ensure the installation of the following software and tools:
+
+- **node**
+- **npm**
+- **git**
+
+### Front-end Technologies and Tools
+
+Ensure you have the following versions or above:
+
+- **ReactJS**
+- **Next.js**
+- **Typescript**
+- **Chakra-UI**
+- **MSW (Mock Service Worker)**
+- **FakerJS**
+- **React Query**
+
+### Tools
+
+For coding, the recommended tool is:
+
+- **Visual Studio Code**
+
+The following extensions will make coding more effective and provide support in specific cases:
+
+- Code Spell Checker
+- ESLint
+- TypeScript Nightly
+- Prettier
+
+## Installation & Configuration
+
+### Cloning the Repository
+
+To begin with the project, clone the repository:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/delta94/Health-app.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Front-end setup
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+To set up the front-end, navigate to the project directory and install dependencies:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+```bash
+cd health-app
+yarn
+```
 
-## Learn More
+### Environment Variables
 
-To learn more about Next.js, take a look at the following resources:
+The project requires certain environment variables. Create a **.env** file in the project root directory.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Inside this file, set the variable `NEXT_PUBLIC_ENABLE_MOCK_SERVICE`:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- If you want to use the mock service (MSW), set the variable to `true`.
+- Otherwise, to connect to the real API, set it to `false`.
 
-## Deploy on Vercel
+Also, set the variable `NEXT_PUBLIC_API_HOST` to `http://localhost:3000` or API endpoint.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Running the Application
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Navigate to the root directory and run the application:
+
+```bash
+yarn dev
+```
+
+Your application will be up and running at `http://localhost:3000` by default.
+
+## Feedback
+
+For any questions, suggestions, or feedback, feel free to reach out via email at **truongdevnht@gmail.com**.
