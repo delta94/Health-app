@@ -5,7 +5,7 @@ import { Box, Flex, GridItem, SimpleGrid, Text, VStack } from '@chakra-ui/react'
 export const ExerciseList = ({ items, id }: { items: ExerciseProps; id: string }) => {
   const { date, data } = items;
   return (
-    <Box id={id} bg="dark.600">
+    <Box mb={14} id={id} bg="dark.600">
       <VStack overflowY="auto" align="stretch" px={6}>
         <Flex pt={4} alignItems="center" fontFamily="inter" color="white" pl={6}>
           <Text fontSize="15px" maxW="96px">

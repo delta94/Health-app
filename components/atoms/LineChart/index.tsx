@@ -1,6 +1,6 @@
 import { LineChartData } from '@/types';
 import { Box, Button, Flex, Text } from '@chakra-ui/react';
-import { ChartData, Chart as ChartJS, registerables } from 'chart.js';
+import { Chart as ChartJS, registerables } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 
 export interface LineChartHeader {
