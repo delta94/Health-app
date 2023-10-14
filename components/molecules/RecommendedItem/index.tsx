@@ -1,17 +1,29 @@
-import { getRecommendBadgeContent } from '@/helpers';
 import { RecommendProps } from '@/types';
 import { Badge, Box, Flex, Image, Text } from '@chakra-ui/react';
-import { useMemo } from 'react';
 
 export const RecommendedItem = ({ date, time, image, title, tags }: RecommendProps) => {
-  const recommendTagContent = useMemo(() => getRecommendBadgeContent(date, time), [time, date]);
-
   return (
     <Box>
       <Box position="relative">
         <Image alt={title} src={image} />
-        <Badge textTransform="capitalize" position="absolute" left="0" bottom="0">
-          {recommendTagContent}
+        <Badge
+          fontSize="15px"
+          fontFamily="inter"
+          px={2}
+          py={1}
+          maxW="141px"
+          w="full"
+          textTransform="capitalize"
+          position="absolute"
+          left="0"
+          bottom="0"
+          display="flex"
+          gap={3}
+          color="white"
+          background="primary.300"
+        >
+          <Text>{date}</Text>
+          <Text>{time}</Text>
         </Badge>
       </Box>
 
