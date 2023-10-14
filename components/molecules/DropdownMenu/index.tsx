@@ -17,10 +17,10 @@ export function DropDownMenu({ items }: { items: MenuItemProps[] }) {
       {items.map((item, index) => (
         <Link href={item.url} key={`${item.label}-${index}`} _hover={{ textDecor: 'none' }}>
           <ListItem
-            _hover={{ bg: '' }}
+            _hover={{ color: 'primary.400' }}
             fontFamily="hira"
             fontSize="18px"
-            color="white"
+            color={item.isActive ? 'primary.400' : 'white'}
             borderBottom="1px solid rgba(255,255,255,0.15)"
             px={8}
             py={6}

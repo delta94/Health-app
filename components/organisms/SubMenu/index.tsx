@@ -14,6 +14,7 @@ export function SubMenu({ items }: { items: MenuItemProps[] }) {
   return (
     <List position="relative" ml={6}>
       <IconButton
+        w={['16px', '16px', 'auto']}
         _hover={{ background: 'transparent' }}
         aria-label={isOpen ? 'Close Menu' : 'Open Menu'}
         icon={<MenuIcon />}
