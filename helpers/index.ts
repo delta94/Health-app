@@ -1,6 +1,6 @@
 export const BASE_PATH = '/';
 import { mealLabelMap } from '@/const/meals';
-import { Diary, Exercise, MealTime, MealTimes } from '@/types';
+import { Category, Diary, Exercise, MealTime, MealTimes } from '@/types';
 import { faker, fakerJA } from '@faker-js/faker';
 
 const recentDate = faker.date.recent({ days: 10 });
@@ -23,6 +23,17 @@ export const generateMeals = (type: MealTime, count: number) => {
   }));
 };
 
+export const generateRecommend = (type: Category, count: number) => {
+  return Array.from({ length: count }, (_, i) => ({
+    id: i + 1,
+    date: formattedFullDate,
+    time: faker.date.recent().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false }),
+    image: fakerJA.image.urlLoremFlickr({ category: 'food' }),
+    title: fakerJA.lorem.sentence(28),
+    tags: Array(2).fill(`#${fakerJA.lorem.word()}`),
+  }));
+};
+
 export const generateExercises = (count: number): Exercise[] => {
   return Array.from({ length: count }, (_, i) => ({
     id: i + 1,
@@ -42,6 +53,10 @@ export const generateDiaryEntries = (count: number): Diary[] => {
 
 export const getMealBadgeContent = (date: string, mealTime: MealTimes) => {
   return `${date}.${mealLabelMap[mealTime]}`;
+};
+
+export const getRecommendBadgeContent = (date: string, time: string) => {
+  return `${date}   ${time}}`;
 };
 
 export const generateChartData = (labels: string[], maxDataValue: number) => ({

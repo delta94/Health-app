@@ -1,4 +1,10 @@
-import { generateChartData, generateDiaryEntries, generateExercises, generateMeals } from '@/helpers';
+import {
+  generateChartData,
+  generateDiaryEntries,
+  generateExercises,
+  generateMeals,
+  generateRecommend,
+} from '@/helpers';
 import { faker } from '@faker-js/faker';
 
 const recentDate = faker.date.recent({ days: 10 });
@@ -12,6 +18,13 @@ export const meals = {
   lunch: generateMeals('lunch', 10),
   dinner: generateMeals('dinner', 10),
   snack: generateMeals('snack', 10),
+};
+
+export const recommend = {
+  column: generateRecommend('column', 20),
+  diet: generateRecommend('diet', 20),
+  beauty: generateRecommend('beauty', 20),
+  health: generateRecommend('health', 20),
 };
 
 export const diaryData = generateDiaryEntries(40);

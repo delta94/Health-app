@@ -5,6 +5,7 @@ export interface MenuItemProps {
   icon?: ReactElement;
   label: string;
   url: string;
+  isActive: boolean;
 }
 
 export type PaginableData<T> = {
@@ -51,4 +52,25 @@ export interface MealItemProps {
   label: MealTimes;
 }
 
+export type Category = 'column' | 'diet' | 'beauty' | 'health';
+
+export interface RecommendProps {
+  id?: number;
+  date: string;
+  time: string;
+  image: string;
+  title: string;
+  tags: string[];
+}
+
 export interface LineChartData extends ChartData<'line', number[], string> {}
+
+export interface ICategoryItem {
+  description: string;
+  label: string;
+  type: Category;
+}
+export interface CategoryItemProps {
+  items: ICategoryItem[];
+  onClick: (type: Category | string) => void;
+}

@@ -1,4 +1,4 @@
-import { MealTime } from '@/types';
+import { Category, MealTime } from '@/types';
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 import { MealsApi } from './api';
 
@@ -7,6 +7,7 @@ export const QUERY_KEYS = {
   useGetExercise: () => ['mealApi.getExercises'],
   useGetDiary: () => ['mealApi.getDiary'],
   useGetChartData: () => ['mealApi.getChartData'],
+  useGetRecommend: () => ['mealApi.getRecommend'],
 };
 
 const timeOptions = { cacheTime: 120000, staleTime: 0 };
@@ -19,6 +20,20 @@ export const useGetMeals = (mealTime: MealTime) => {
       return lastPage.last ? null : lastPage.page + 1;
     },
   });
+};
+
+export const useGetRecommend = (type: Category | string) => {
+  return useInfiniteQuery(
+    QUERY_KEYS.useGetRecommend(),
+    ({ pageParam = 1 }) => MealsApi.getRecommend({ pageParam, type }),
+    {
+      ...timeOptions,
+      keepPreviousData: true,
+      getNextPageParam: lastPage => {
+        return lastPage.last ? null : lastPage.page + 1;
+      },
+    }
+  );
 };
 
 export const useGetExercise = () => {

@@ -1,4 +1,4 @@
-import { Diary, ExerciseProps, LineChartData, MealItemProps, PaginableData } from '@/types';
+import { Diary, ExerciseProps, LineChartData, MealItemProps, PaginableData, RecommendProps } from '@/types';
 import axios from 'axios';
 
 const baseUrlV1 = `/api`;
@@ -7,6 +7,14 @@ export namespace MealsApi {
   export const getMeals = async ({ pageParam = 1, mealTime = 'all' }) => {
     const response = await axios.get<PaginableData<MealItemProps>>(
       `${baseUrlV1}/meals?page=${pageParam}&type=${mealTime}`
+    );
+
+    return response.data;
+  };
+
+  export const getRecommend = async ({ pageParam = 1, type = 'column' }) => {
+    const response = await axios.get<PaginableData<RecommendProps>>(
+      `${baseUrlV1}/recommend?page=${pageParam}&type=${type}`
     );
 
     return response.data;
