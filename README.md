@@ -7,7 +7,7 @@
 </div>
 
 <div align="center">
-  <a href="https://health-nslmvpmrt-delta94.vercel.app/">View Demo</a>
+  <a href="https://health-app-delta94.vercel.app">View Demo</a>
 </div>
 
 ## Introduction
