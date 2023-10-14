@@ -1,14 +1,18 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
 import localFont from 'next/font/local';
 import './globals.css';
 import RootStyleRegistry from './registry';
 
-const inter = Inter({ display: 'swap', subsets: ['latin'], variable: '--font-inter' });
 const hira = localFont({
   src: '../assets/fonts/Hiragino.otf',
   display: 'swap',
   variable: '--font-hira',
+});
+
+const inter = localFont({
+  src: '../assets/fonts/Inter-Regular.ttf',
+  display: 'swap',
+  variable: '--font-inter',
 });
 
 export const metadata: Metadata = {
