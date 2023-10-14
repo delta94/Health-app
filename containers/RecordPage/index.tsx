@@ -2,7 +2,7 @@
 
 // External Library Imports
 import { Chart, registerables } from 'chart.js';
-import { Box, Button, Center, Container, Skeleton } from '@chakra-ui/react';
+import { Box, Button, Center, Container, Skeleton, Text } from '@chakra-ui/react';
 import { useMeasure } from 'react-use';
 
 import LineChart from '@/components/atoms/LineChart';
@@ -81,9 +81,14 @@ export default function RecordPage() {
         )}
 
         {diaryData ? (
-          diaryData.pages.map((page, pageIndex) => (
-            <DiaryList id={SECTION_IDS.MyDiary} key={page.data[pageIndex].id} items={page.data} />
-          ))
+          <Box>
+            <Text fontSize="22px" fontFamily="inter" fontWeight="400" w="full">
+              MY DIARY
+            </Text>
+            {diaryData.pages.map((page, pageIndex) => (
+              <DiaryList id={SECTION_IDS.MyDiary} key={page.data[pageIndex].id} items={page.data} />
+            ))}
+          </Box>
         ) : (
           <SkeletonGrid height="188px" columns={[1, 2, 2, 4, 4]} count={8} mt={2} gap={2} />
         )}
