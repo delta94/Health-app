@@ -19,6 +19,7 @@ export default function RecommendPage() {
     hasNextPage,
     refetch,
     isFetchingNextPage,
+    isRefetching,
   } = useGetRecommend(categoryFilter);
   const handleLoadMore = () => {
     setPage(page + 1);
@@ -38,7 +39,7 @@ export default function RecommendPage() {
       <Container my={14} display="flex" flexDir="column" alignItems="center" maxW="container.lg">
         <CategoryList items={categories} onClick={handleFilterClick} />
 
-        {recommendData ? (
+        {recommendData && !isRefetching ? (
           recommendData.pages.map((page, pageIndex) => (
             <RecommendList key={page.data[pageIndex].id} items={page.data} />
           ))

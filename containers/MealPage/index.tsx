@@ -19,7 +19,15 @@ export default function MealPage() {
   const [page, setPage] = useState(1);
   const [mealTimeFilter, setMealTimeFilter] = useState<MealTime>('all');
 
-  const { data: mealsData, fetchNextPage, hasNextPage, refetch, isFetchingNextPage } = useGetMeals(mealTimeFilter);
+  const {
+    data: mealsData,
+    fetchNextPage,
+    hasNextPage,
+    refetch,
+    isFetchingNextPage,
+    isRefetching,
+    remove,
+  } = useGetMeals(mealTimeFilter);
   const [ref, { width }] = useMeasure<HTMLDivElement>();
   const handleLoadMore = () => {
     setPage(page + 1);
@@ -32,7 +40,7 @@ export default function MealPage() {
 
   useEffect(() => {
     refetch();
-  }, [mealTimeFilter, refetch]);
+  }, [mealTimeFilter, refetch, remove]);
 
   return (
     <>
@@ -46,7 +54,7 @@ export default function MealPage() {
       <Container mt={6} mb={14} display="flex" flexDir="column" alignItems="center" maxW="container.lg">
         <FilterList onFilter={handleFilterClick} />
 
-        {mealsData ? (
+        {mealsData && !isRefetching ? (
           mealsData.pages.map((page, pageIndex) => <MealList key={page.data[pageIndex].id} items={page.data} />)
         ) : (
           <SkeletonGrid columns={[1, 2, 2, 4, 4]} count={8} mt={2} gap={2} />
